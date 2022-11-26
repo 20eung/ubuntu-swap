@@ -94,6 +94,50 @@ Mem:          964Mi       666Mi        61Mi       1.0Mi       235Mi       148Mi
 Swap:         2.0Gi       153Mi       1.8Gi
 ```
 
+## 7. 스왑 파일 자동 마운트 설정
+```
+$ sudo cp /etc/fstab /etc/fstab.bak
+
+$ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+/swapfile none swap sw 0 0
+
+```
+
+## 8. 스왑 설정 조정
+
+스왑을 처리할 때 시스템 성능에 영향을 줄 수 있는 몇 가지 옵션 구성
+
+### 교환 속성 조정: swappiness
+
+시스템이 RAM에서 스왑 공간으로 데이터를 스왑하는 빈도. 0 ~ 100%
+
+```
+$ cat /proc/sys/vm/swappiness
+60
+
+$ sudo sysctl vm.swappiness=10
+vm.swappiness = 10
+
+$ echo 'vm.swappiness = 10' | sudo tee -a /etc/sysctl.conf
+vm.swappiness = 10
+
+```
+
+### 캐시 압력 설정 조정: vfs_cache_pressure
+
+시스템이 다른 데이터에 대해 inode 및 dentry 정보를 캐시하도록 선택하는 양을 구성
+
+```
+$ cat /proc/sys/vm/vfs_cache_pressure
+100
+
+$ sudo sysctl vm.vfs_cache_pressure=50
+m.vfs_cache_pressure = 50v
+
+$ echo 'vm.vfs_cache_pressure = 50'  | sudo tee -a /etc/sysctl.conf
+m.vfs_cache_pressure = 50
+```
+
 ***
 ## 참고 링크
 - How To Add Swap Space on Ubuntu 20.04: https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-20-04
