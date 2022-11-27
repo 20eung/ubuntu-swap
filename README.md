@@ -132,7 +132,7 @@ $ cat /proc/sys/vm/vfs_cache_pressure
 100
 
 $ sudo sysctl vm.vfs_cache_pressure=50
-m.vfs_cache_pressure = 50v
+m.vfs_cache_pressure = 50
 
 $ echo 'vm.vfs_cache_pressure = 50'  | sudo tee -a /etc/sysctl.conf
 m.vfs_cache_pressure = 50
